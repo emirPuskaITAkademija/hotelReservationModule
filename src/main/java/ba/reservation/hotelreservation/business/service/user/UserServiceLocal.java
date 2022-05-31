@@ -11,4 +11,6 @@ public interface UserServiceLocal {
      * @return user or null if user not exist
      */
     public User login(String username, String password);
+
+    void create(User user);
 }

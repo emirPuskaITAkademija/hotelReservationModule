@@ -30,6 +30,21 @@ class UserService implements UserServiceLocal{
         }
     }
 
+    @Override
+    public void create(User user) {
+        EntityManager entityManager  = getEntityManager();
+        // begin transaction
+        entityManager.getTransaction().begin();
+        if (!entityManager.contains(user)) {
+            // persist object - add to entity manager
+            entityManager.persist(user);
+            // flush em - save to DB
+            entityManager.flush();
+        }
+        // commit transaction at all
+        entityManager.getTransaction().commit();
+    }
+
     private EntityManager getEntityManager() {
         return Persistence.createEntityManagerFactory(Constants.PU_NAME).createEntityManager();
     }

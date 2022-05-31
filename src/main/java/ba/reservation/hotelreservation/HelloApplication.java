@@ -1,6 +1,8 @@
 package ba.reservation.hotelreservation;
 
+import ba.reservation.hotelreservation.business.model.Privilege;
 import ba.reservation.hotelreservation.business.model.User;
+import ba.reservation.hotelreservation.business.service.user.PrivilegeService;
 import ba.reservation.hotelreservation.business.service.user.UserServiceFactory;
 import ba.reservation.hotelreservation.controller.Controller;
 import ba.reservation.hotelreservation.gui.login.LoginView;
@@ -25,10 +27,15 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
-//        String username = "ferida.bobar";
-//        String password = "ferida123";
-//        User user = UserServiceFactory.USER_SERVICE.getUserService().login(username, password);
-//        System.out.println(user);
+//        launch();
+
+        User user = new User();
+        user.setName("Merjem");
+        user.setSurname("Puška");
+        user.setUsername("mejra2");
+        user.setPassword("merjem");
+        Privilege privilege = new PrivilegeService().findAll().iterator().next();
+        user.setIdPrivilege(privilege);
+        UserServiceFactory.USER_SERVICE.getUserService().create(user);
     }
 }
